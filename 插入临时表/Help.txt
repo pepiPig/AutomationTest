@@ -1,0 +1,11 @@
+1.安装python
+2.CMD去安装两个包
+pip install xlrd
+pip install xlwt
+3.我们电脑没法装pycharm，所以直接命令行运行test.py，
+如下：
+cd D:\ZLY\插入临时表
+D:\ZLY\插入临时表>python test.py
+输入今天是第几次插入临时表：01
+输入数据总行数：10072
+文件名：申诉VIN.xlsx
