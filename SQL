@@ -1,0 +1,20 @@
+substr(string,start_index,string_len) --截取
+
+replace(l.mobile,substr(l.mobile,4,4),'****') 手机号
+
+substr(nvl(T.mobile ,T.CONTACT_mobile ),0,3)||'****'||substr(nvl(T.mobile ,T.CONTACT_mobile ),-4) --||连接字符串
+
+随机取20条数据：ROWNUM<='20'
+select row_number() over(partition by A order by B ) as rowIndex from table--A ：为分组字段，B：为分组后的排序字段。
+
+row_numer()：按查出的记录数前后排序，序号不重复。即第1条记录序号为1，第2条记录序号2，第3条记录序号为3（不考虑3条记录的排序字段是否重复）。
+
+rank()：跳跃排序，排序字段值相同的序号相同。例如3条记录中前2条排序字段值相同，第3条不同，则前3条记录的排序号为1,1,3。
+
+dense_rank()：连续排序。例如前4条记录中，1和2的排序字段值相同，3和4的排序字段值相同，则4条记录的排序号为1,1,2,2。
+
+--获取每个班的前2(几)名 该语句是对分数相同的记录进行了同一排名，例如：两个80分的并列第2名，第4名就没有了
+select * from
+(
+select *,rank() over(partition by Grade order by Score desc) as Sequence from Student
+)T where T.Sequence<=2
